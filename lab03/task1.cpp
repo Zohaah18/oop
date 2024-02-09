@@ -1,78 +1,88 @@
-#include<iostream>
+#include <iostream>
+#include <string>
 using namespace std;
-
-class BoardMarker{
-    private:
+class BoardMarker {
+private:
     string brand;
     string shade;
     bool refillable;
     bool ink_status;
 
-   public:
+public:
+    
+    // Getter methods
+       string getBrand() {
+        return brand;
+    }
 
-   void setbrand(string brand){
-      brand=currency;
-   }
-   void setshade(string shade){
-    shade=color;
-   }
-   void set_refillable(bool refillable){
-    refillable=choice;
-   }
-   void set_inkstatus(bool ink_status){
-    ink_status=status;
-   }
-   // Getter methods
-   string getbrand(){
-      return brand;
-   }
-    string getshade(){
+      string getShade() {
         return shade;
     }
-    bool isrefillable(){
+
+    bool isRefillable(){
         return refillable;
     }
-    bool ink_status(){
+
+    bool isInkDepleted() const {
         return ink_status;
     }
-   
-  void write() const {
+
+    // Setter methods
+    void setBrand(string brand) {
+        this->brand = brand;
+    }
+
+    void setShade(string shade) {
+        this->shade = shade;
+    }
+
+    void setRefillable(bool refillable) {
+        this->refillable = refillable;
+    }
+
+    void setInkStatus(bool ink_status) {
+        this->ink_status = ink_status;
+    }
+
+    // Writing method
+    void write() {
         if (isInkDepleted()) {
-            cout << "Cannot write. Ink is depleted." << endl;
-        } else {
-         cout << "Writing..." << endl;
+            cout << "Cannot write. " << endl;
+        } 
+        else {
+            cout << "Writing..." << endl;
         }
     }
-  void refill() {
+
+    // Refill method
+    void refill() {
         if (isRefillable()) {
             cout << "Refilling the board marker." << endl;
             ink_status = true;
         } else {
-            std::cout << "Cannot refill" << endl;
+        cout << "Cannot refill. Marker is not refillable." <<endl;
         }
     }
 };
 
 int main() {
-   
+    // Illustrating the class functionality
     BoardMarker marker;
 
-    
     marker.setBrand("Sharpie");
     marker.setShade("red");
     marker.setInkStatus(false);
 
-
+    
     cout << "Brand: " << marker.getBrand() << endl;
     cout << "Shade: " << marker.getShade() << endl;
-    cout << "Refillable: " << boolalpha << marker.isRefillable() << endl;
-     cout << "Ink status: "  << marker.isInkDepleted() <<endl;
-    marker.refill();
-    marker.write();  
+    cout << "Refillable: " << boolalpha << marker.isRefillable() <<endl;
+    cout << "Ink Depleted: " << boolalpha << marker.isInkDepleted() << endl;
 
-    marker.setRefillable(false); /
-    marker.refill();            
+    marker.write(); 
+    marker.refill(); 
 
+    marker.setRefillable(false); 
+    marker.refill();             
     return 0;
 }
-
